@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Management Report</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">	
+	<div class="panel panel-default">
+  	<!-- Default panel contents -->
+  	<div class="panel-heading"><h2 th:text="${laporan.nama}"></h2></div>
+  	
+  	<div>
+  	<tbody id="portfolio" class="clear fix">
+  <tr th:each="laporan : ${laporans}" th:text="${laporan.nama}">
+    <td>
+      <div th:unless="${brickset.imageList == null}">
+        <div th:each="imageList : ${#strings.arraySplit(laporan.imageList, ',')}">
+          <a th:href="${'/images/ + image}" th:remove="${image} == null ? tag" th:title="${brickset.brand.name}">
+            <img th:src="${'/images/ + image}" height="64" th:remove="${status.index} > 0 ? tag"/>
+          </a>
+        </div>
+      </div>
+    </td>
+  </tr>
+  </tbody> </div>
+  
+  
+	
+  	</div> 
+  	</div>
+</body>
+</html>

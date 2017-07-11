@@ -1,0 +1,83 @@
+* {
+    box-sizing: border-box;
+}
+
+.columns {
+    margin-bottom:20px;
+    cursor:pointer;
+}
+.columns:hover .header { background-color:red;border-top-left-radius: 20px;
+    border-top-right-radius: 20px;}
+.columns:hover .button{ background-color:red;}
+.columns:hover .grey {font-size:30px; color:#4CAF50; }
+.columns:hover .price { color:red;border-top-left-radius: 20px;border-top-right-radius: 20px;}
+
+.price {
+    list-style-type: none;
+    border: 1px solid #eee;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    overflow: hidden;
+}
+
+.price:hover {
+    box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
+}
+
+.price .header {
+    background-color: #111;
+    color: white;
+    font-size: 25px;
+    transition: all .2s ease-in-out;
+}
+
+.price li {
+    border-bottom: 1px solid #eee;
+    padding:12px;
+    text-align: center;
+
+}
+.highlight { transition: 0.3s;}
+.highlight:hover {-webkit-transform:scale(1.5);transform:scale(1.5);}
+
+.price .grey {
+    background-color: #eee;
+    font-size: 20px;
+    transition: all .2s ease-in-out;
+}
+
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    transition: all .2s ease-in-out;
+}
+.button:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+@media only screen and (max-width: 600px) {
+    .columns {
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

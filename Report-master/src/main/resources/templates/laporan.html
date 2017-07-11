@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Management Report</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+	<div class="panel panel-default">
+  	<!-- Default panel contents -->
+  	<div class="panel-heading"><h2 th:text="${laporan.nama}"></h2></div>
+  	
+  
+  	
+  	<li th:each="laporan : ${laporans}"/>
+  	
+  	<table class="table table-striped">
+					  			<tr>
+					  				<th>Foto</th>
+					  				<th>Power Point</th>
+					  				
+					  			</tr>
+					  			<tr th:each="laporans : ${laporan}">
+					  			
+					  			<td><a th:href="${'/images/'+laporans.imageList}" >Gambar</a></td>
+					  			<td><a th:href="${'/file/'+laporans.fileLaporan}" th:text="${laporans.fileLaporan}"></a></td>
+					  			<td><img width="200" height ="200" th:src="@{/images/}+${laporans.imageList}+' '" /></td>
+					  			
+					  			
+					   			</tr>
+					   			
+					   			
+					  			 
+					  			
+					  			
+							</table>
+							<div ></div>
+	
+  	</div> 
+  	</div>
+</body>
+</html>
