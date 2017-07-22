@@ -5,9 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,9 +19,10 @@ import com.itdel.model.User;
 import com.itdel.service.LaporanService;
 import com.itdel.service.UserService;
 
+
+
 @Controller
 public class LoginController {
-	
 	
 	@Autowired
 	private UserService userService;
@@ -31,21 +30,22 @@ public class LoginController {
 	private LaporanService laporanService;
 
 	
-//	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
-//	public ModelAndView login(){
-//		ModelAndView modelAndView = new ModelAndView();
-//		modelAndView.setViewName("login");
-//		return modelAndView;
-//	}
-//	
-//	@RequestMapping(value="/registration", method = RequestMethod.GET)
-//	public ModelAndView registration(){
-//		ModelAndView modelAndView = new ModelAndView();
-//		User user = new User();
-//		modelAndView.addObject("user", user);
-//		modelAndView.setViewName("registration");
-//		return modelAndView;
-//	}
+	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
+	public ModelAndView login(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("login");
+		return modelAndView;
+	}
+	
+	
+	@RequestMapping(value="/registration", method = RequestMethod.GET)
+	public ModelAndView registration(){
+		ModelAndView modelAndView = new ModelAndView();
+		User user = new User();
+		modelAndView.addObject("user", user);
+		modelAndView.setViewName("registration");
+		return modelAndView;
+	}
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
@@ -69,23 +69,18 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/home", method = RequestMethod.GET)
-	public ModelAndView home() {
-		
+	public ModelAndView home(){
 		ModelAndView modelAndView = new ModelAndView();
 		List<Laporan> listLaporan =  new ArrayList<>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		
 		User user = userService.findUserByEmail(auth.getName());
 		listLaporan = laporanService.getAllLaporanByRole(user.getRoles());
-//		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-//		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
-
-		
-		for(Laporan laporan : listLaporan)
-		System.out.println(laporan.getNama());
+		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
 		modelAndView.addObject("listLaporan", listLaporan);
 		modelAndView.addObject("currentUser", user);
-		
+		for(Laporan laporan : listLaporan)
+			System.out.println(laporan.getNama());
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}

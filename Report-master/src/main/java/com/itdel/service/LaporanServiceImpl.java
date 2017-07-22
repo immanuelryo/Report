@@ -5,28 +5,17 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.itdel.model.Laporan;
 import com.itdel.model.Role;
 import com.itdel.repository.LaporanRepository;
-import com.itdel.repository.PagingRepository;
-
 
 @Service("laporanService")
 public class LaporanServiceImpl implements LaporanService{
 	
 	@Autowired
 	LaporanRepository laporanRepository;
-	
-	@Autowired
-	PagingRepository pagingRepository;
-
 
 	@Override
 	public Laporan getLaporan(int id_Laporan) {
@@ -67,18 +56,6 @@ public class LaporanServiceImpl implements LaporanService{
 				return listLaporan = laporanRepository.getLaporanByRole("TECHNICAL");
 		}
 		return listLaporan;
-		
 	}
-
-	@Override	
-	public List<Laporan> splitMultiplePhoto() {
-		return laporanRepository.findAll();
-	}
-
-	@Override
-	public List<Laporan> findJudul(String nama) {
-		nama = "%"+nama+"%";
-		return laporanRepository.getLaporanByJudul(nama);
-	}
-
+	
 }

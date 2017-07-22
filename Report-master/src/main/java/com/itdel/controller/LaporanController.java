@@ -8,7 +8,6 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.thymeleaf.expression.Arrays;
 
 import com.itdel.model.Laporan;
 import com.itdel.model.User;
@@ -66,7 +64,6 @@ public class LaporanController {
 		Laporan laporan = new Laporan();
 		laporanService.saveLaporan(laporan);
 		List<String> listNameFile =  new ArrayList<>();
-		List<String> split =  new ArrayList<>();
 		
 		if (fileLaporan.isEmpty()) {
 			redirectAttributes.addFlashAttribute("message", "Please select a file Laporan to upload");
@@ -93,17 +90,17 @@ public class LaporanController {
 				path = Paths.get(UPLOADED_FOLDER + "/images" +"/" +file.getOriginalFilename());
 				Files.write(path, bytes);
 				listNameFile.add(file.getOriginalFilename().toString());
-				Collections.replaceAll(listNameFile, "i", "a");
 				laporan.setImageList(listNameFile.toString().substring(1, listNameFile.toString().length()-1));
-//				split = listNameFile.replaceAll("\\s","");  
-//				System.out.println(listNameFile.replace(' ', 'a'));	
-				System.out.println("bisa???"+listNameFile.toString());	
+//				System.out.println("dimana?" +file.getOriginalFilename());
+				System.out.println(listNameFile);
+				
+				
 			}
 			
 			redirectAttributes.addFlashAttribute("message", "You succesfully uploaded "+ listNameFile.toString());
 		}
 		catch (IOException ioe) {
-			ioe.printStackTrace();//
+			ioe.printStackTrace();
 		}
 		laporan.setNama(request.getParameter("nama").toString());
 		laporan.setRoles(user.getRoleAsString());
@@ -125,25 +122,6 @@ public class LaporanController {
 	public String lihatLaporan(@PathVariable Integer id_Laporan, Model model)
 	{
 		model.addAttribute("laporan", laporanService.getLaporan(id_Laporan));
-		return "laporan";
+		return "laporan2";
 	}	
-	
-//	@RequestMapping(value = "laporan/delete/{id_Laporan}", method = RequestMethod.GET)
-//	public String deleteLaporan(Laporan laporan)
-//	{
-//		laporanService.deletelaporan(laporan);
-//		return "laporan";
-//	}
-//	
-	
-	
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
-		public String SearchByKeyword(Model model, HttpServletRequest request)
-		{
-			String nama = request.getParameter("nama");
-			model.addAttribute("search", nama);
-			model.addAttribute("listLaporan", laporanService.findJudul(nama));
-			return "index";
-		}
-	
 }
