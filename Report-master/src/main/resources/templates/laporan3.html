@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+	<div class="panel panel-default">
+  	<!-- Default panel contents -->
+  	<div class="panel-heading"><h2>List Gambar</h2></div>
+		<table class="table">
+			<tr>
+				<th>Gambar</th>
+			</tr>
+			<tr th:each="foto : ${fotos}">
+				 <img th:src="${'/file/images/'+foto}" alt="/image/del.jpg" style="width:25%;height:32em"/>
+			</tr>
+		</table>
+		
+	
+	</div>
+		
+	</div>
+	
+</body>
+</html>

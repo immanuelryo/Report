@@ -8,6 +8,7 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class LaporanController {
 	
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	
-	private String UPLOADED_FOLDER =  "C://Users//Immanuel Sitanggang//Documents//GitHub//SpringBootSecurity-master//src//main//resources//static//";
+	private String UPLOADED_FOLDER =  "C:/Users/Danie/imanuel/git/Report-master/src/main/resources/static/file";
 	
 	@PreAuthorize("hasRole('ROLE_DEVELOPER')")
 	@RequestMapping("/developer/index")
@@ -94,9 +95,8 @@ public class LaporanController {
 //				System.out.println("dimana?" +file.getOriginalFilename());
 				System.out.println(listNameFile);
 				
-				
 			}
-			
+			laporan.setImageList(laporan.getImageList().replaceAll(" ", ""));
 			redirectAttributes.addFlashAttribute("message", "You succesfully uploaded "+ listNameFile.toString());
 		}
 		catch (IOException ioe) {
@@ -121,7 +121,10 @@ public class LaporanController {
 	@RequestMapping (value="laporan/{id_Laporan}", method = RequestMethod.GET)
 	public String lihatLaporan(@PathVariable Integer id_Laporan, Model model)
 	{
-		model.addAttribute("laporan", laporanService.getLaporan(id_Laporan));
-		return "laporan2";
+		Laporan laporan = laporanService.getLaporan(id_Laporan);
+		String[] fotoLaporans = laporan.getImageList().split(",");
+		model.addAttribute("fotos", fotoLaporans);
+		//model.addAttribute("laporan", laporanService.getLaporan(id_Laporan));
+		return "laporan3";
 	}	
 }
